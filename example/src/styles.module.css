@@ -1,0 +1,31 @@
+
+.ActionButtonWrapper {
+  width: 35px;
+  height: 35px;
+  color: #828282;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+  cursor: pointer;
+
+}
+.ActionButtonWrapper:hover {
+  color: #07285b;
+  background: #e9e9e9;
+}
+.DeleteWrapper {
+  width: 35px;
+  height: 35px;
+  color: #828282;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+  cursor: pointer;
+
+}
+.DeleteWrapper:hover {
+    color: #eb5757;
+    background: #e9e9e9;
+}

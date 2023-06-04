@@ -1,9 +1,90 @@
-/* add css module styles here (optional) */
-
-.test {
-  margin: 2em;
-  padding: 0.5em;
-  border: 2px solid #000;
-  font-size: 2em;
-  text-align: center;
+/*.test {*/
+/*  margin: 2em;*/
+/*  padding: 0.5em;*/
+/*  border: 2px solid #000;*/
+/*  font-size: 2em;*/
+/*  text-align: center;*/
+/*}*/
+.SelectWrapper {
+  width: 48px;
+  overflow: scroll;
+  padding-right: 15px;
+  height: 100%;
 }
+.ActionsColumn {
+  height: max-content;
+}
+/*.TableColumns3rdWrapper {*/
+/*  flex: 1;*/
+/*  overflow-y: hidden;*/
+/*  overflow-x: scroll;*/
+/*  position: relative;*/
+/*}*/
+.SelectHeaderItem {
+  height: 24px;
+  border-bottom: 1px solid #e9e9e9;
+  padding: 16px;
+  position: absolute;
+  background-color: #ffffff;
+  width: 16px;
+  border-top-left-radius: 8px;
+}
+.HeaderItem {
+  width: max-content;
+  font-weight: 700;
+}
+.HeaderItemPositionAdjustment {
+  height: 24px;
+  padding: 16px 17px 16px 17px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.RowItem {
+  width: max-content;
+}
+.WidthMaxContent {
+  width: max-content;
+}
+.ActionButtonsWrapper {
+  display: flex;
+  gap: 8px;
+}
+/*.ActionButtonWrapper {*/
+/*  width: 35px;*/
+/*  height: 35px;*/
+/*  color: #828282;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  border-radius: 18px;*/
+/*  cursor: pointer;*/
+
+/*}*/
+/*.ActionButtonWrapper:hover {*/
+/*  color: #07285b;*/
+/*  background: #e9e9e9;*/
+/*}*/
+/*.DeleteWrapper {*/
+/*  width: 35px;*/
+/*  height: 35px;*/
+/*  color: #828282;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  border-radius: 18px;*/
+/*  cursor: pointer;*/
+
+/*}*/
+/*.DeleteWrapper:hover {*/
+/*    color: #eb5757;*/
+/*    background: #e9e9e9;*/
+/*}*/
+.ResetPasswordWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #828282;
+  font-size: 12px;
+  cursor: pointer;
+}
+

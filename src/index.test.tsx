@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import { ReactResponsiveTableCustomizable } from '.'
 
-describe('ExampleComponent', () => {
+describe('ReactResponsiveTableCustomizable', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(ReactResponsiveTableCustomizable).toBeTruthy()
   })
 })
