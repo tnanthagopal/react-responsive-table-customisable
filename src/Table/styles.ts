@@ -93,12 +93,15 @@ export const TableColumnsWrapper = (props: {
   isWidthPercentageActive: boolean
 }) => {
   const styleObj: any = {}
-  styleObj.width = props.isWidthPercentageActive ? '100%' : 'max-content'
+  styleObj.width = props.isWidthPercentageActive
+    ? 'calc(100% + 15px)'
+    : 'max-content'
   return {
     display: 'flex',
     height: '100%',
     overflowY: 'scroll',
     paddingRight: '15px',
+    boxSizing: 'border-box',
     ...styleObj
   }
 }
@@ -114,7 +117,7 @@ export const TableColumn = (props: { widthPercentage?: string }) => {
 }
 export const ActionHeaderItem = (props: { width: number }) => {
   return {
-    height: '24px',
+    height: '56px',
     borderBottom: '1px solid #e9e9e9',
     padding: '16px',
     position: 'absolute',
@@ -122,7 +125,8 @@ export const ActionHeaderItem = (props: { width: number }) => {
     fontWeight: '700',
     textAlign: 'right',
     borderTopRightRadius: '8px',
-    width: props.width
+    width: props.width,
+    boxSizing: 'border-box'
   } as any
 }
 export const HeaderItemWrapper = (props: {
@@ -137,11 +141,12 @@ export const HeaderItemWrapper = (props: {
     styleObj.textAlign = props.textAlign
   }
   return {
-    height: '24px',
+    height: '56px',
     padding: '16px',
     borderBottom: '1px solid #e9e9e9',
     position: 'absolute',
     backgroundColor: '#ffffff',
+    boxSizing: 'border-box',
     ...styleObj
   }
 }
@@ -157,9 +162,12 @@ export const RowItemWrapper = (props: {
     styleObj.textAlign = props.textAlign
   }
   return {
-    height: '30px',
+    height: '62px',
     borderBottom: '1px solid #e9e9e9',
     padding: '16px',
+    boxSizing: 'border-box',
+    display: 'flex',
+    alignItems: 'center',
     ...styleObj
   }
 }
@@ -169,9 +177,76 @@ export const SideRowItem = (props: { selected?: boolean }) => {
     styleObj.background = '#f4f8fa'
   }
   return {
-    height: '30px',
+    height: '62px',
     borderBottom: '1px solid #e9e9e9',
     padding: '16px',
+    boxSizing: 'border-box',
+    display: 'flex',
+    alignItems: 'center',
     ...styleObj
   }
 }
+export const TableStyles = {
+  SelectWrapper: {
+    width: '63px',
+    overflow: 'scroll',
+    paddingRight: '15px',
+    height: '100%',
+    boxSizing: 'border-box'
+  },
+  ActionsColumn: {
+    height: 'max-content'
+  },
+  SelectHeaderItem: {
+    height: '56px',
+    borderBottom: '1px solid #e9e9e9',
+    padding: '16px',
+    position: 'absolute',
+    backgroundColor: '#ffffff',
+    width: '48px',
+    borderTopLeftRadius: '8px',
+    boxSizing: 'border-box',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  HeaderItem: {
+    width: 'max-content',
+    fontWeight: '700',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  HeaderItemPositionAdjustment: {
+    height: '56px',
+    padding: '16px 17px 16px 17px',
+    fontWeight: '700',
+    color: '#ffffff',
+    boxSizing: 'border-box'
+  },
+  RowItem: {
+    width: 'max-content'
+  },
+  WidthMaxContent: {
+    width: 'max-content'
+  },
+  ActionButtonsWrapper: {
+    display: 'flex',
+    gap: '8px'
+  },
+  ChevronWrapper: {
+    flexGrow: 1,
+    paddingLeft: '10px',
+    cursor: 'pointer'
+  },
+  UpChevron: {
+    transform: 'scale(2, 1)',
+    height: '9px',
+    width: '7px',
+    fontSize: '7px'
+  },
+  DownChevron: {
+    transform: 'scale(2, 1) rotate(180deg)',
+    height: '9px',
+    width: '7px',
+    fontSize: '7px'
+  }
+} as any

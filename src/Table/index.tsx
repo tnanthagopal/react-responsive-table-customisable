@@ -18,11 +18,11 @@ import {
   TableColumns3rdWrapper,
   TableColumns2ndWrapper,
   ActionHeaderItem,
-  TableBorders
+  TableBorders,
+  TableStyles
 } from './styles'
-import styles from '../styles.module.css'
 // eslint-disable-next-line no-unused-vars
-import iTableProps from './modal'
+import { iTableProps } from './modal'
 import Pagination from './pagination'
 
 const Index = ({
@@ -32,9 +32,6 @@ const Index = ({
   selectedRows,
   handleClickCheckBox,
   handleClickAllCheckBox,
-  deleteOnClick,
-  editOnClick,
-  resetPasswordOnClick,
   searchValue,
   actionColumnWidth,
   paginationComponent,
@@ -44,6 +41,11 @@ const Index = ({
 }: iTableProps) => {
   // Data manipulation
   const [selectedPage, setSelectedPage] = useState(0)
+  const [sortedColumn, setSortedColumn] = useState({
+    accessor: '',
+    sortColumn: '',
+    up: false
+  })
   const [pageSize, setPageSize] = useState(10)
   const filteredData = (data || []).filter((item) => {
     const filteredColumns = columns.filter((columnItem) => {
@@ -51,14 +53,33 @@ const Index = ({
     })
     return !!filteredColumns.length
   })
-  const pageCount = Math.ceil((filteredData?.length || pageSize) / pageSize)
+  const sortedData =
+    sortedColumn.accessor === ''
+      ? filteredData
+      : filteredData.sort((a, b) =>
+          sortedColumn.up
+            ? a[sortedColumn.sortColumn] > b[sortedColumn.sortColumn]
+              ? 1
+              : -1
+            : a[sortedColumn.sortColumn] < b[sortedColumn.sortColumn]
+            ? 1
+            : -1
+        )
+
+  const pageCount = Math.ceil((sortedData?.length || pageSize) / pageSize)
   const dataToShow = showPagination
-    ? filteredData.slice(
+    ? sortedData.slice(
         selectedPage * pageSize,
         selectedPage * pageSize + pageSize
       )
-    : filteredData
+    : sortedData
   data?.length < selectedPage * pageSize && setSelectedPage(0)
+
+  const handleSortColumn = (accessor: string, sortColumn: string) => {
+    const up = accessor !== sortedColumn.accessor
+    const newAccessor = !up && up === sortedColumn.up ? '' : accessor
+    setSortedColumn({ accessor: newAccessor, sortColumn, up })
+  }
   //! Data manipulation
 
   // Table Design
@@ -136,9 +157,7 @@ const Index = ({
   }, [triggerRenderOnWidthPercentageActiveChange, isWidthPercentageActive])
   //! Table Design
 
-  console.log(resetPasswordOnClick, pageCount, setPageSize)
-
-  console.log(' isWidthPercentageActive', isWidthPercentageActive)
+  // console.log(' isWidthPercentageActive', isWidthPercentageActive)
   const PaginationComponent = paginationComponent || Pagination
   return (
     <div style={TableBorders({ height: tableBordersHeight, maxHeight })}>
@@ -149,7 +168,7 @@ const Index = ({
         {showSelectRow && (
           <div style={SelectWrapperOuter({ isWidthPercentageActive })}>
             <div
-              className={styles.SelectWrapper}
+              style={TableStyles.SelectWrapper}
               id='selectWrapperElem'
               onScroll={() => {
                 const selectWrapperElemScrollTop =
@@ -168,14 +187,14 @@ const Index = ({
                 actionsWrapperElem.scrollTop = selectWrapperElemScrollTop
               }}
             >
-              <div className={styles.SelectHeaderItem}>
+              <div style={TableStyles.SelectHeaderItem}>
                 <input
                   type='checkbox'
                   checked={(selectedRows || []).length === data.length}
                   onClick={handleClickAllCheckBox}
                 />
               </div>
-              <div className={styles.HeaderItemPositionAdjustment} />
+              <div style={TableStyles.HeaderItemPositionAdjustment} />
               {dataToShow.map((item, i) => (
                 <div
                   style={SideRowItem({
@@ -239,15 +258,35 @@ const Index = ({
                       style={HeaderItemWrapper({
                         textAlign: column.textAlign,
                         width:
-                          (columnRefs?.current[index]?.current?.offsetWidth ||
-                            500) - 32
+                          columnRefs?.current[index]?.current?.offsetWidth ||
+                          500 // What is this 500
                       })}
                     >
-                      <div className={styles.HeaderItem}>{column.header}</div>
+                      <div style={TableStyles.HeaderItem}>
+                        {column.header}
+                        <div
+                          style={TableStyles.ChevronWrapper}
+                          onClick={() =>
+                            handleSortColumn(
+                              column.accessor,
+                              column.sortColumn || column.accessor
+                            )
+                          }
+                        >
+                          <div style={TableStyles.UpChevron}>
+                            {(sortedColumn.accessor !== column.accessor ||
+                              sortedColumn.up) && <Fragment>&#9650;</Fragment>}
+                          </div>
+                          <div style={TableStyles.DownChevron}>
+                            {(sortedColumn.accessor !== column.accessor ||
+                              !sortedColumn.up) && <Fragment>&#9650;</Fragment>}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     {/* added the below here to adjust the margin top and the width of column */}
-                    <div className={styles.HeaderItemPositionAdjustment}>
-                      <div className={styles.WidthMaxContent}>
+                    <div style={TableStyles.HeaderItemPositionAdjustment}>
+                      <div style={TableStyles.WidthMaxContent}>
                         {column.header}
                       </div>
                     </div>
@@ -261,7 +300,7 @@ const Index = ({
                           })}
                           key={rowIndex}
                         >
-                          <div className={styles.RowItem}>
+                          <div style={TableStyles.RowItem}>
                             {item[column.accessor] || ''}
                           </div>
                         </div>
@@ -273,7 +312,7 @@ const Index = ({
             </div>
           </div>
         </div>
-        {(deleteOnClick || editOnClick) && (
+        {actionButtonComponents && (
           <div
             style={ActionsWrapper({ isWidthPercentageActive })}
             ref={ActionsWrapperRef}
@@ -295,18 +334,18 @@ const Index = ({
               selectWrapperElem.scrollTop = actionsWrapperElemScrollTop
             }}
           >
-            <div className={styles.ActionsColumn}>
+            <div style={TableStyles.ActionsColumn}>
               <div
                 style={ActionHeaderItem({
                   width:
-                    (ActionsWrapperRef?.current?.offsetWidth ||
-                      actionColumnWidth || // this is used when loading is in progress only
-                      0) - 32 // 0 will be used when loading is in progress only
+                    ActionsWrapperRef?.current?.offsetWidth ||
+                    actionColumnWidth || // this is used when loading is in progress only
+                    0 // 0 will be used when loading is in progress only
                 })}
               >
                 Action
               </div>
-              <div className={styles.HeaderItemPositionAdjustment}>Action</div>
+              <div style={TableStyles.HeaderItemPositionAdjustment}>Action</div>
               {dataToShow.map((item, i) => (
                 <div
                   style={SideRowItem({
@@ -314,7 +353,7 @@ const Index = ({
                   })}
                   key={i}
                 >
-                  <div className={styles.ActionButtonsWrapper}>
+                  <div style={TableStyles.ActionButtonsWrapper}>
                     {actionButtonComponents.map((el: any, i: number) => (
                       <Fragment key={i}>{el(item)}</Fragment>
                     ))}
