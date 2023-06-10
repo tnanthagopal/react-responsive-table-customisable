@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Table from './Table'
 // eslint-disable-next-line no-unused-vars
 import { iTableProps } from './Table/modal'

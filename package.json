@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-table-customisable",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Responsive, customisable react-table",
   "author": "tnanthagopal",
   "license": "MIT",
@@ -52,7 +52,6 @@
     "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
-    "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
     "typescript": "^3.7.5",
