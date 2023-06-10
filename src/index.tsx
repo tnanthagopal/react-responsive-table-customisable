@@ -3,7 +3,7 @@ import Table from './Table'
 // eslint-disable-next-line no-unused-vars
 import { iTableProps } from './Table/modal'
 
-const ReactResponsiveTableCustomizable = ({
+export const ReactResponsiveTableCustomizable = ({
   height,
   columns,
   data,
@@ -34,4 +34,4 @@ const ReactResponsiveTableCustomizable = ({
     />
   )
 }
-export default ReactResponsiveTableCustomizable
+// export default ReactResponsiveTableCustomizable

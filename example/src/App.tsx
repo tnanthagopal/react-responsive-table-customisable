@@ -1,6 +1,5 @@
 import React from 'react'
 import  ReactResponsiveTableCustomizable   from 'react-responsive-table-customisable'
-import 'react-responsive-table-customisable/dist/index.css'
 import styles from './styles.module.css'
 
 export const columns = [
