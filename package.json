@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-table-customisable",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Responsive, customisable react-table",
   "author": "tnanthagopal",
   "license": "MIT",
@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
+  "type": "module",
   "engines": {
     "node": ">=10"
   },
