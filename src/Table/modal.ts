@@ -4,6 +4,7 @@ export interface iColumn {
   widthPercentage?: string
   textAlign?: string
   sortColumn?: string
+  searchColumn?: string
 }
 export interface iTableProps {
   columns: iColumn[]
@@ -13,6 +14,7 @@ export interface iTableProps {
   selectedRows?: string[]
   handleClickCheckBox?: (x: string) => any
   handleClickAllCheckBox?: () => any
+  handleClickRow?: (x: string) => any
   actionColumnWidth?: number // this is used when loading is in progress only
   paginationComponent?: any
   actionButtonComponents?: any

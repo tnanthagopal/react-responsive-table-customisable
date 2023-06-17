@@ -15,7 +15,8 @@ const ReactResponsiveTableCustomizable = ({
   handleClickAllCheckBox,
   paginationComponent,
   showSelectRow,
-  showPagination
+  showPagination,
+  handleClickRow
 }: iTableProps) => {
   return (
     <Table
@@ -31,6 +32,7 @@ const ReactResponsiveTableCustomizable = ({
       paginationComponent={paginationComponent}
       showSelectRow={showSelectRow}
       showPagination={showPagination}
+      handleClickRow={handleClickRow}
     />
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import  ReactResponsiveTableCustomizable   from 'react-responsive-table-customisable'
+import ReactResponsiveTableCustomizable from 'react-responsive-table-customisable'
 import styles from './styles.module.css'
 
 export const columns = [
@@ -138,6 +138,9 @@ const App = () => {
           console.log(id)
         }}
         handleClickAllCheckBox={() => {}}
+        handleClickRow={(x) => {
+          console.log(x)
+        }}
       />
     </div>
   )

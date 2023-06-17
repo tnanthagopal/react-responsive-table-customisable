@@ -15,13 +15,14 @@ export const TableBorders = (props: {
     ...styleObj
   }
 }
-export const TableWrapper = (props: { height?: number }) => {
+export const TableWrapper = (props: { height?: number; noData?: boolean }) => {
+  // if no data, there will be no pagination
   const styleObj: any = {}
   if (props.height) {
-    styleObj.height = `${props.height - 67}px`
+    styleObj.height = props.noData ? props.height : `${props.height - 67}px`
   } else {
     styleObj.height = 'max-content'
-    styleObj.maxHeight = `calc(100% - 67px)`
+    styleObj.maxHeight = props.noData ? '100%' : `calc(100% - 67px)`
   }
   return {
     overflow: 'hidden',
@@ -97,7 +98,6 @@ export const TableColumnsWrapper = (props: {
     ? 'calc(100% + 15px)'
     : 'max-content'
   return {
-    display: 'flex',
     height: '100%',
     overflowY: 'scroll',
     paddingRight: '15px',
@@ -153,10 +153,14 @@ export const HeaderItemWrapper = (props: {
 export const RowItemWrapper = (props: {
   textAlign?: string
   selected?: boolean
+  handleClickRowFunctionAvailable?: boolean
 }) => {
   const styleObj: any = {}
   if (props.selected) {
     styleObj.background = '#f4f8fa'
+  }
+  if (props.handleClickRowFunctionAvailable) {
+    styleObj.cursor = 'pointer'
   }
   if (props.textAlign) {
     styleObj.textAlign = props.textAlign
@@ -240,13 +244,20 @@ export const TableStyles = {
   UpChevron: {
     transform: 'scale(2, 1)',
     height: '9px',
-    width: '7px',
     fontSize: '7px'
   },
   DownChevron: {
     transform: 'scale(2, 1) rotate(180deg)',
     height: '9px',
-    width: '7px',
     fontSize: '7px'
+  },
+  TableColumnsWrapperInner: {
+    display: 'flex'
+  },
+  NoRecordFound: {
+    height: '70px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 } as any
